@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orbita-challenge-backend-Domain", "Orbita-challenge-backend-domain\Orbita-challenge-backend-Domain.csproj", "{AAE9E5C9-3D79-48E5-B03D-DAE7157F9E9B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orbita-challenge-backend-Tests", "Orbita-challenge-backend-Tests\Orbita-challenge-backend-Tests.csproj", "{EF6BB331-F3DE-417D-9257-B828F92C9970}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AAE9E5C9-3D79-48E5-B03D-DAE7157F9E9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAE9E5C9-3D79-48E5-B03D-DAE7157F9E9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAE9E5C9-3D79-48E5-B03D-DAE7157F9E9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAE9E5C9-3D79-48E5-B03D-DAE7157F9E9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF6BB331-F3DE-417D-9257-B828F92C9970}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF6BB331-F3DE-417D-9257-B828F92C9970}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF6BB331-F3DE-417D-9257-B828F92C9970}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF6BB331-F3DE-417D-9257-B828F92C9970}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {33EA9B97-EC18-4970-AAED-CA97CA935292}
+	EndGlobalSection
+EndGlobal
