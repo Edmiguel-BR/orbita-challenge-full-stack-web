@@ -4,10 +4,12 @@ namespace Orbita_challenge_backend_domain.Interfaces
 {
     public interface IAlunoRepository
     {
-        void Delete(int id);
+        void Delete(string ra);
         void Insert(Aluno entity);
         void Update(Aluno entity);
-        Task<Aluno> GetById(int id);
+        bool SaveChanges();
+        Task<Aluno> GetByRA(string ra);
+        Task<Aluno> GetByCPF(string cpf);
         Task<IEnumerable<Aluno>> GetAll();
     }
 }
