@@ -5,7 +5,7 @@ using Orbita_challenge_backend_Infra.Context;
 
 namespace Orbita_challenge_backend_Infra.Repositories
 {
-    internal class AlunoRepository : IAlunoRepository
+    public class AlunoRepository : IAlunoRepository
     {
         private readonly AppDbContext _context;
 
@@ -13,29 +13,27 @@ namespace Orbita_challenge_backend_Infra.Repositories
         {
             _context = context;
         }
-        public void Insert(Aluno entity)
+        public void Insert(Aluno aluno)
         {
-            _context.AddAsync(entity);
+            _context.AddAsync(aluno);
+            _context.SaveChanges();
         }
 
-        public void Update(Aluno entity)
+        public void Update(Aluno aluno)
         {
-            _context.Update(entity);
+            _context.Update(aluno);
+            _context.SaveChanges();
         }
 
         public void Delete(string ra)
         {
-            var aluno = _context.Alunos.FirstOrDefault(a => a.RA == ra);
+            var aluno = _context.Alunos.Find(ra);
 
             if (aluno != null)
             {
                 _context.Remove(aluno);
+                _context.SaveChanges();
             }
-        }
-
-        public bool SaveChanges()
-        {
-            return _context.SaveChanges() > 0;
         }
 
         public async Task<IEnumerable<Aluno>> GetAll()
