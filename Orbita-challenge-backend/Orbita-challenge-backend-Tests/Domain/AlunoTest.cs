@@ -5,7 +5,7 @@ namespace Orbita_challenge_backend_Tests.Domain
     public class AlunoTest
     {
         [Fact]
-        public void Should_Create_A_Student_With_Valid_Data_And_Must_Be_Validated_Correctly()
+        public void Should_Create_A_Aluno_With_Valid_Data_And_Must_Be_Validated_Correctly()
         {
             var aluno = new Aluno()
             {
@@ -28,7 +28,7 @@ namespace Orbita_challenge_backend_Tests.Domain
         [InlineData("", "email", "", "123456", "O CPF do aluno deve ser preenchido corretamente")]
         [InlineData("", "email", "", "123.123.123-12", "Informe um CPF válido para o aluno")]
         [InlineData("", "email", "", "123.123.123-1A", "O CPF do aluno deve ser preenchido corretamente")]
-        public void Should_Create_A_Student_With_Invalid_Data_And_Must_Be_Invalidated(string nome, string email, string ra, string cpf, string cpfErrorMessage)
+        public void Should_Create_A_Aluno_With_Invalid_Data_And_Must_Be_Invalidated(string nome, string email, string ra, string cpf, string cpfErrorMessage)
         {
             var aluno = new Aluno() { Nome = nome, Email = email, RA = ra, CPF = cpf };
 
@@ -44,7 +44,7 @@ namespace Orbita_challenge_backend_Tests.Domain
         }
 
         [Fact]
-        public void Should_Create_A_Student_With_Invalid_Data_Size_And_Must_Be_Invalidated()
+        public void Should_Create_A_Aluno_With_Invalid_Data_Size_And_Must_Be_Invalidated()
         {
             var aluno = new Aluno()
             {
