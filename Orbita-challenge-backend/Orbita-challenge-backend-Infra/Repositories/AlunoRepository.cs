@@ -2,6 +2,7 @@
 using Orbita_challenge_backend_domain.Entities;
 using Orbita_challenge_backend_domain.Interfaces;
 using Orbita_challenge_backend_Infra.Context;
+using Orbita_challenge_backend_Infra.Exceptions;
 
 namespace Orbita_challenge_backend_Infra.Repositories
 {
@@ -13,27 +14,40 @@ namespace Orbita_challenge_backend_Infra.Repositories
         {
             _context = context;
         }
-        public void Insert(Aluno aluno)
+        public async Task<bool> Insert(Aluno aluno)
         {
-            _context.AddAsync(aluno);
-            _context.SaveChanges();
+            if (Existis(aluno))
+            {
+                throw new ValidationDataException($"Aluno já cadastrado: {aluno.RA}");
+            }
+
+            await _context.AddAsync(aluno);
+            return Commit();
         }
 
-        public void Update(Aluno aluno)
+        public bool Update(Aluno aluno)
         {
+
+            if (!Existis(aluno))
+            {
+                throw new ValidationDataException($"Aluno não encontrado: {aluno.RA}");
+            }
+
             _context.Update(aluno);
-            _context.SaveChanges();
+            return Commit();
         }
 
-        public void Delete(string ra)
+        public bool Delete(string ra)
         {
             var aluno = _context.Alunos.Find(ra);
 
-            if (aluno != null)
+            if (aluno == null)
             {
-                _context.Remove(aluno);
-                _context.SaveChanges();
+                throw new ValidationDataException($"Aluno não encontrado: {ra}");
             }
+
+            _context.Alunos.Remove(aluno);
+            return Commit();
         }
 
         public async Task<IEnumerable<Aluno>> GetAll()
@@ -41,14 +55,23 @@ namespace Orbita_challenge_backend_Infra.Repositories
             return await _context.Alunos.ToListAsync();
         }
 
-        public Task<Aluno> GetByRA(string ra)
+        public async Task<Aluno> GetByRA(string ra)
         {
-            return _context.Alunos.FirstOrDefaultAsync(a => a.RA == ra);
+            return await _context.Alunos.FirstOrDefaultAsync(a => a.RA == ra);
         }
 
-        public Task<Aluno> GetByCPF(string cpf)
+        public async Task<Aluno> GetByCPF(string cpf)
         {
-            return _context.Alunos.FirstOrDefaultAsync(a => a.CPF == cpf);
+            return await _context.Alunos.FirstOrDefaultAsync(a => a.CPF == cpf);
         }
+        private bool Commit()
+        {
+            return _context.SaveChanges() > 0;
+        }
+        private bool Existis(Aluno aluno)
+        {
+            return _context.Alunos.Find(aluno.RA) != null;
+        }
+
     }
 }

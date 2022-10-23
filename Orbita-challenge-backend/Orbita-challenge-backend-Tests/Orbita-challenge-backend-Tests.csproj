@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Orbita-challenge-backend-Application\Orbita-challenge-backend-Application.csproj" />
     <ProjectReference Include="..\Orbita-challenge-backend-domain\Orbita-challenge-backend-Domain.csproj" />
     <ProjectReference Include="..\Orbita-challenge-backend-Infra\Orbita-challenge-backend-Infra.csproj" />
   </ItemGroup>

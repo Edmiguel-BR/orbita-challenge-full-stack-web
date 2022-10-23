@@ -27,7 +27,6 @@ namespace Orbita_challenge_backend_domain.Entities
 
             RuleFor(x => x.CPF)
                 .Custom(CPFValidation());
-
         }
 
         private static Action<string, ValidationContext<Aluno>> CPFValidation() => (cpf, context) =>
