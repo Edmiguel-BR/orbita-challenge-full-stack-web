@@ -43,6 +43,8 @@ namespace Orbita_challenge_backend_API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Orbita_challenge_backend_API", Version = "v1" });
                 c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First()); //This line
             });
+
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +56,13 @@ namespace Orbita_challenge_backend_API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Orbita_challenge_backend_API v1"));
             }
+
+            app.UseCors(option =>
+            {
+                option.AllowAnyOrigin();
+                option.AllowAnyMethod();
+                option.AllowAnyHeader();
+            });
 
             app.UseHttpsRedirection();
 
