@@ -1,48 +1,56 @@
 <template>
     <div>
-        <v-divider class="mx-8" inset vertical> </v-divider>
-        <v-data-table :headers="headers" :items="alunos" :items-per-page="5" style="width: 100%">
+        <v-divider class="mx-8" inset vertical></v-divider>
+        <v-card width="70vw">
+            <v-row no-gutters>
+                <v-col cols="10" sm="8" md="5">
+                    <v-text-field append-icon="mdi-magnify" dense class="pl-5" outlined tile v-model="textSearch">
+                    </v-text-field>
+                </v-col>
+                <v-col align="right" class="pt-3">
+                    <v-btn color="primary" class="mx-2" fab dark small @click="showEditDialog()">
+                        <v-icon small>mdi-plus</v-icon>
+                    </v-btn>
+                </v-col>
+            </v-row>
+        </v-card>
+        <v-data-table :headers="headers" :items="alunos" :items-per-page="5" :search="textSearch" style="width: 100%">
             <template v-slot:[`item.actions`]="{ item }">
-                <v-btn class="mx-2" fab dark small @click="showEditDialog(item)" color="teal">
+                <v-btn class="mx-1" fab dark small @click="showEditDialog(item)" color="teal">
                     <v-icon small>mdi-pencil</v-icon>
                 </v-btn>
-                <v-btn class="mx-2" fab dark small @click="deleteItem(item)" color="error">
+                <v-btn class="mx-1" fab dark small @click="deleteItem(item)" color="error">
                     <v-icon small>mdi-delete</v-icon>
                 </v-btn>
             </template>
         </v-data-table>
-        <v-flex xs12 offset-xs11>
+
+        <v-flex>
             <v-dialog v-model="dialog" max-width="700px">
-                <template v-slot:activator="{}">
-                    <div class="d-flex">
-                        <v-btn right color="primary" class="mx-2" fab dark small @click="showEditDialog()">
-                            <v-icon small>mdi-plus</v-icon>
-                        </v-btn>
-                    </div>
-                </template>
                 <v-card>
                     <v-card-title>
-                        <span v-if="editedItem.ra">Editar aluno</span>
+                        <span v-if="editedItem.ra">Edição de aluno</span>
                         <span v-else>Novo aluno</span>
                     </v-card-title>
+                    <v-divider class="mx-8" inset vertical></v-divider>
                     <v-card-text>
                         <v-row>
+                            <v-col cols="12" sm="6">
+                                <v-text-field v-mask="'###.###.###-##'" v-model="editedItem.cpf" outlined label="CPF"
+                                    :readonly=isDisabled :rules="[rules.required]"></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="6">
+                                <v-text-field v-model="editedItem.ra" outlined label="Registro Acadêmico"
+                                    :readonly=isDisabled maxlength="50" :rules="[rules.required]"></v-text-field>
+                            </v-col>
                             <v-col cols="12" sm="12">
-                                <v-text-field v-model="editedItem.nome" label="Nome" maxlength="100"
+                                <v-text-field v-model="editedItem.nome" outlined label="Nome" maxlength="100"
                                     :rules="[rules.required]">
                                 </v-text-field>
                             </v-col>
                             <v-col cols="12" sm="12">
-                                <v-text-field v-model="editedItem.email" label="E-mail" maxlength="100"
+                                <v-text-field v-model="editedItem.email" outlined label="E-mail" maxlength="100"
                                     :rules="[rules.required, rules.email]"></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="6">
-                                <v-text-field v-mask="'###.###.###-##'" v-model="editedItem.cpf" label="CPF"
-                                    :readonly=isDisabled :rules="[rules.required]"></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="6">
-                                <v-text-field v-model="editedItem.ra" label="Registro Acadêmico" :readonly=isDisabled
-                                    maxlength="50" :rules="[rules.required]"></v-text-field>
                             </v-col>
                         </v-row>
                     </v-card-text>
@@ -55,6 +63,7 @@
                 </v-card>
             </v-dialog>
         </v-flex>
+        
     </div>
 </template>
 <script>
@@ -83,6 +92,7 @@ export default {
             dialog: false,
             alunos: [],
             editedItem: {},
+            textSearch: "",
             isNew: false,
             rules: {
                 required: value => !!value || 'O campo deve ser preenchido',
