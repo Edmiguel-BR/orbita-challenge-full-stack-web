@@ -7,13 +7,15 @@
 
 É uma abordagem de modelagem de software que segue um conjunto de práticas com objetivo de facilitar a implementação de regras/processos complexos de negócios, ao qual chamamos de domínio. Isolando entidades no domínio, temos a vantagem de implementar num único local da aplicação os motivos para a existência e a razão para a mudança dos dados (regras de negócio).
 Por recomendação, podemos separar a solução em camadas de Apresentação, Aplicação, Domínio e Infra, porém, este procedimento não é uma regra. O importante é que as entidadees, os motivos para a existência e mudanças de estado destas entidades sejam facilmente identificadas no projeto.
-[![DDD](/img/DDD.png "DDD")]
-(/img/DDD.png)
+
+[![DDD](/img/DDD.png "DDD")
+
 
 - CQRS - Command and Query Responsibility Segregation (Segregação de Responsabilidade de Comando e Consulta)
 
 Padrão que tem por objetivo separar a responsabilidade de escrita (commands) e leitura (queries) dos dados do sistema. Como vantagens na implementação desse padrão podemos citar a flexibilização na implementação de estratégias distintas para a escrita e leitura dos dados (um banco relacional para escrita e um banco desnormatizado para leitura, ORM para escrita e queries customizadas para o banco de leitura, utilização de cache, etc)
-[![CQRS](/img/CQRS.png "CQRS")]
+
+[![CQRS](/img/CQRS.png "CQRS")
 
 **Frontend:**
 Foi utilizada a versão 2 do Vue.js devido a compatibilidade com o pacote Vuetify. Por ter pouco conhecimento no desenvolvimento frontend, utilizei como base para a implementação a documentação nos sites [Vuejs.org][1] e [Vuetify.com][2]
